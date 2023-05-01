@@ -1,19 +1,18 @@
 package com.learntocode;
 
 import java.io.*;
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<transaction> transactionList = new ArrayList<transaction>();
+    static ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 
     public static void main(String[] args) {
         loadEntrance();
+
     }
 
     public static void loadTransactions() {
@@ -29,9 +28,8 @@ public class Main {
                 String description = tokens[2];
                 String vendor = tokens[3];
                 float price = Float.parseFloat(tokens[4]);
-                transaction transaction = new transaction(date, time, description, vendor, price);
+                Transaction transaction = new Transaction(date, time, description, vendor, price);
                 System.out.println(transaction);
-                reader.close();
             }
         } catch (Exception e) {
             System.out.println("Error reading file");
@@ -57,6 +55,9 @@ public class Main {
                 case "P":
                     makePayment();
                     break;
+                case "L":
+                    ledger();
+                    break;
                 default:
                     System.out.println("Invalid choice");
                     break;
@@ -64,7 +65,7 @@ public class Main {
         }
     }
 
-    public static void addDeposit() {
+    public static void makePayment() {
         System.out.println("What have you recently purchased?");
         String description = scanner.next();
         System.out.println("Who did you purchase it from?");
@@ -76,7 +77,7 @@ public class Main {
         System.out.println("And how much was the payment made for?");
         float price = scanner.nextFloat();
 
-        transaction newRecord = new transaction(date, time, description, vendor, price);
+        Transaction newRecord = new Transaction(date, time, description, vendor, price);
         transactionList.add(newRecord);
         try {
             String filePath = "transactions.csv";
@@ -90,7 +91,7 @@ public class Main {
         }
     }
 
-    public static void makePayment() {
+    public static void addDeposit() {
         System.out.println("What did you recently receive?");
         String description = scanner.next();
         System.out.println("Who did you receive it from?");
@@ -102,7 +103,7 @@ public class Main {
         System.out.println("And how much was the payment received for?");
         float price = scanner.nextFloat();
 
-        transaction newRecord = new transaction(date, time, description, vendor, price);
+        Transaction newRecord = new Transaction(date, time, description, vendor, price);
         transactionList.add(newRecord);
         try {
             String filePath = "transactions.csv";
@@ -113,6 +114,78 @@ public class Main {
             bufWrite.close();
         } catch (Exception w) {
             System.out.println("Invalid file");
+        }
+    }
+    public static void ledger() {
+        boolean choices = true;
+        String choice;
+        while (choices != false) {
+            System.out.println("A. Display All Entries");
+            System.out.println("D. Display Deposits");
+            System.out.println("P. Display Payments");
+            System.out.println("R. Run Reports");
+            System.out.println("H. Home page");
+            choice = scanner.next();
+            switch (choice){
+                case "A":
+                    showEntries();
+                    break;
+                case "D":
+                    displayDeposits();
+                    break;
+                case "P":
+                    displayPayments();
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        }
+    }
+    public static void showEntries(){
+        loadTransactions();
+    }
+    public static void displayDeposits(){
+        String filename = "transactions.csv";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            String line;
+            System.out.println("Transactions:");
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split("\\|");
+                LocalDate date = LocalDate.parse(tokens[0]);
+                LocalTime time = LocalTime.parse(tokens[1]);
+                String description = tokens[2];
+                String vendor = tokens[3];
+                float price = Float.parseFloat(tokens[4]);
+                Transaction transaction = new Transaction(date, time, description, vendor, price);
+                if (transaction.getPrice() > 0 ){
+                    System.out.println(transaction);
+                }
+            }
+        }catch (Exception a){
+            System.out.println("Invalid");
+        }
+    }
+    public static void displayPayments(){
+        String filename = "transactions.csv";
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            String line;
+            System.out.println("Transactions:");
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split("\\|");
+                LocalDate date = LocalDate.parse(tokens[0]);
+                LocalTime time = LocalTime.parse(tokens[1]);
+                String description = tokens[2];
+                String vendor = tokens[3];
+                float price = Float.parseFloat(tokens[4]);
+                Transaction transaction = new Transaction(date, time, description, vendor, price);
+                if (transaction.getPrice() < 0 ){
+                    System.out.println(transaction);
+                }
+            }
+        }catch (Exception a){
+            System.out.println("Invalid");
         }
     }
 }

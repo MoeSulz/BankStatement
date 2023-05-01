@@ -3,14 +3,14 @@ package com.learntocode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class transaction {
+public class Transaction {
     private LocalDate date;
     private LocalTime time;
     private String description;
     private String vendor;
     private float price;
 
-    public transaction(LocalDate date, LocalTime time, String description, String vendor, float price) {
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, float price) {
         this.date = date;
         this.time = time;
         this.description = description;

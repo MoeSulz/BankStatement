@@ -7,8 +7,6 @@
     <list default="true" id="1445937d-99f0-4134-99b2-7ee370054c30" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/learntocode/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/learntocode/transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transactions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/transactions.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +43,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Student/Desktop/LearnToCode_Capstones/BankStatement"
   }
 }]]></component>
   <component name="RunManager">

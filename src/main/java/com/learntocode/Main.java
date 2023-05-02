@@ -58,6 +58,9 @@ public class Main {
                 case "L":
                     ledger();
                     break;
+                case "X":
+                    System.out.println("Exiting your Bank Application. Thank You!");
+                    return;
                 default:
                     System.out.println("Invalid choice");
                     break;
@@ -136,6 +139,10 @@ public class Main {
                 case "P":
                     displayPayments();
                     break;
+                case "R":
+                    runReports();
+                case "H":
+                    returnHome();
                 default:
                     System.out.println("Invalid choice");
             }
@@ -187,6 +194,12 @@ public class Main {
         }catch (Exception a){
             System.out.println("Invalid");
         }
+    }
+    public static void runReports(){
+
+    }
+    public static void returnHome(){
+        loadEntrance();
     }
 }
 

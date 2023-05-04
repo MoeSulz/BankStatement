@@ -196,9 +196,68 @@ public class Main {
         }
     }
     public static void runReports(){
+        LocalDate date = LocalDate.now();
 
+        boolean choices = true;
+        int choice;
+        while (choices != false) {
+            System.out.println("Custom Search Report:");
+            System.out.println("1. Month to Date");
+            System.out.println("2. Previous Month");
+            System.out.println("3. Year to Date");
+            System.out.println("4. Previous Year");
+            System.out.println("5. Search by Vendor");
+            System.out.println("0. Return to Report Page");
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    for (Transaction comp : transactionList) {
+                        if (comp.getDate().isBefore(date.plusDays(1)) && comp.getDate().isAfter(date.minusMonths(1).minusDays(1))) {
+                            System.out.println(comp);
+                        }
+                    }
+                    break;
+                case 2:
+                    for(Transaction comp:transactionList) {
+                    if (comp.getDate().isAfter(date.minusMonths(1).minusDays(1)) && comp.getDate().isBefore(date.minusMonths(1))) {
+                        System.out.println(comp);
+                    }
+
+                }
+                break;
+                case 3:
+                    for(Transaction comp:transactionList) {
+                        if (comp.getDate().isBefore(date.plusDays(1)) && comp.getDate().isAfter(date.minusYears(1))) {
+                            System.out.println(comp);
+                        }
+                    }
+                    break;
+                case 4:
+                    for(Transaction comp:transactionList) {
+                        if (comp.getDate().isAfter(date.minusYears(1).minusMonths(date.getMonthValue())) && comp.getDate().isBefore(date.minusMonths(date.getMonthValue() - 1))) {
+                            System.out.println(comp);
+                        }
+                    }
+                    break;
+                case 5:
+                    System.out.println("What is the name of the vendor?");
+                    String response = scanner.next();
+                    for (Transaction comp:transactionList){
+                        if(comp.getVendor().equals(response)){
+                            System.out.println(comp);
+                        }
+                    }
+                    break;
+                case 0:
+                    returnHome();
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    break;
+            }
+        }
     }
-    public static void returnHome(){
+    public static void returnHome() {
         loadEntrance();
     }
 }
